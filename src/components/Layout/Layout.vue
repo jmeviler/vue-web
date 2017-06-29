@@ -1,7 +1,6 @@
 <template>
   <div class="layout-container">
-    <Sidebar />
-    <AppMain />
+    <el-button type="primary" icon="edit"></el-button>
   </div>
 </template>
 

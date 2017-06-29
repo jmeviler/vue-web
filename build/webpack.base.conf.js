@@ -26,7 +26,7 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'modules': path.resolve(__dirname, '../src/modules'),
+      'views': path.resolve(__dirname, '../src/views'),
       'scss': path.resolve(__dirname, '../src/scss'),
       'api': path.resolve(__dirname, '../src/api'),
       'utils': path.resolve(__dirname, '../src/utils'),

@@ -1,15 +1,10 @@
-import Layout from 'components/Layout/Layout'
-import Main from 'modules/Main/Main'
+import Layout from 'views/Layout/Layout'
+import Main from 'views/Main/Main'
 import Router from 'vue-router'
-import ToDoList from 'modules/ToDoList/ToDoList'
+import ToDoList from 'views/ToDoList/ToDoList'
 import Vue from 'vue'
 
 Vue.use(Router)
-
-// const beforeEnterHome = (to, from, next) => {
-//   console.error(to)
-//   next('/test')
-// }
 
 export default new Router({
   mode: 'history',
