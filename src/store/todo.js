@@ -10,7 +10,7 @@ const state = {
 
 // actios
 const actions = {
-  async fetchAllTodos ({ commit, state }) {
+  async fetchAllTodos ({ commit }) {
     const todos = await fetchAllTodos()
     const { entrance_info } = todos.stationInfo[0] || {}
     commit(types.FETCH_ALL, { entrance_info })

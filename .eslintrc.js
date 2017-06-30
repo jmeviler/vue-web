@@ -1,5 +1,3 @@
-// http://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
   parser: 'babel-eslint',
@@ -9,20 +7,20 @@ module.exports = {
   env: {
     browser: true,
   },
-
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
+  extends: [
+    'standard',
+    'plugin:vue/base'
   ],
-  // add your custom rules here
+  plugins: [
+    'html',
+    'eslint-plugin-vue'
+  ],
   'rules': {
-    // allow paren-less arrow functions
     'arrow-parens': 0,
-    'no-self-compare': 0,
-    // allow async-await
     'generator-star-spacing': 0,
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'semi':0,
+    'no-new':0,
+    'no-undef':0
   }
 }
