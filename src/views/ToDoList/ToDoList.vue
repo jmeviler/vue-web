@@ -1,6 +1,6 @@
 <template>
   <div class="todo-container">
-    <input v-model="newTodo" placeholder="add todos.." @keyup.enter="addTodo">
+    <input placeholder="add todos.." @keyup.enter="addTodo">
     <hr>
     <div
       v-for="todo in todos"
@@ -14,47 +14,52 @@
     <input
       class="edit"
       v-show="editTodo === todo"
-      v-model="todo.text"
-      @blur="doneEdit(todo)"
-      @keyup.enter="doneEdit(todo)"
-      @keyup.esc="cancelEdit(todo)"
+      :value="todo.text"
+      @blur="doneEdit"
+      @keyup.enter="doneEdit"
+      @keyup.esc="cancelEdit"
     >
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'ToDoList',
   data () {
     return {
-      newTodo: '',
-      editTodo: {},
-      todos: []
+      editTodo: {}
+    }
+  },
+  computed: {
+    todos () {
+      return this.$store.state.todo.todos
     }
   },
   methods: {
-    addTodo: function () {
-      const { todos, newTodo } = this
+    ...mapActions([
+      'addToDo',
+      'deleteToDo',
+      'updateToDo'
+    ]),
+    addTodo: function (e) {
+      const { todos } = this
+      const newTodo = e.target.value
       if (!newTodo.trim().length) return
-      this.todos.push({ key: todos.length + 1, text: newTodo })
-      this.newTodo = ''
+      this.addToDo({ key: todos.length + 1, text: newTodo })
+      e.target.value = ''
     },
     onClickDel: function (item) {
-      const { todos } = this
-      this.todos = todos.filter(todo => item.key !== todo.key)
+      this.deleteToDo(item)
     },
     onEditTodo: function (todo) {
       this.editTodo = todo
     },
-    doneEdit: function (item) {
-      const { todos } = this
-      this.todos = todos.map(todo => {
-        if (todo.key === item.key) {
-          todo.text = item.text
-        }
-        return todo
-      })
+    doneEdit: function (e) {
+      const item = { ...this.editTodo, text: e.target.value }
+      this.updateToDo(item)
       this.cancelEdit()
     },
     cancelEdit: function () {
