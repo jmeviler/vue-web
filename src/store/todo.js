@@ -1,5 +1,7 @@
 import * as types from 'constant/mutationTypes'
 
+import { fetchAllTodos } from 'api/todo'
+
 // initial state
 const state = {
   todos: [],
@@ -8,6 +10,11 @@ const state = {
 
 // actios
 const actions = {
+  async fetchAllTodos ({ commit, state }) {
+    const todos = await fetchAllTodos()
+    const { entrance_info } = todos.stationInfo[0] || {}
+    commit(types.FETCH_ALL, { entrance_info })
+  },
   addToDo ({ commit, state }, todo) {
     commit(types.ADD_TODO, { todo })
   },
@@ -21,6 +28,9 @@ const actions = {
 
 // mutations
 const mutations = {
+  [types.FETCH_ALL] (state, { entrance_info }) {
+    state.todos.push({ key: 1, text: entrance_info })
+  },
   [types.ADD_TODO] (state, { todo }) {
     state.todos.push(todo)
   },

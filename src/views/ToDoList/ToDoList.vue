@@ -33,6 +33,9 @@ export default {
       editTodo: {}
     }
   },
+  created: function () {
+    this.fetchAllTodos()
+  },
   computed: {
     todos () {
       return this.$store.state.todo.todos
@@ -42,7 +45,8 @@ export default {
     ...mapActions([
       'addToDo',
       'deleteToDo',
-      'updateToDo'
+      'updateToDo',
+      'fetchAllTodos'
     ]),
     addTodo: function (e) {
       const { todos } = this
