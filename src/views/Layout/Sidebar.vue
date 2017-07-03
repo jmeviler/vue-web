@@ -6,18 +6,19 @@
       theme="dark"
       @select="handleSelect"
     >
-      <el-submenu index="1">
-        <template slot="title">导航一</template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-        <el-menu-item index="1-3">选项3</el-menu-item>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
+      <!--不包含子导航-->
+      <el-menu-item v-for="(item, index) in data" v-if="!item.child" v-bind:key="index" v-bind:index="item.route">
+        {{item.name}}
+      </el-menu-item>
+
+      <!--包含子导航-->
+      <el-submenu v-for="(item, index) in data" v-if="item.child" v-bind:key="index" v-bind:index="item.route">
+        <template slot="title">{{item.name}}</template>
+        <el-menu-item v-for="(subItem, index) in item.child" v-bind:key="index" v-bind:index="subItem.route">
+          {{subItem.name}}
+        </el-menu-item>
       </el-submenu>
-      <el-menu-item index="2">导航二</el-menu-item>
-      <el-menu-item index="3">导航三</el-menu-item>
+
     </el-menu>
   </el-col>
 </template>
@@ -25,14 +26,15 @@
 <script>
 export default {
   name: 'Sidebar',
+  props: ['data'],
   data () {
     return {
       activeIndex: '1'
     }
   },
   methods: {
-    handleSelect: (key) => {
-      console.error(key)
+    handleSelect: function (key) {
+      this.$router.push(key)
     }
   }
 }

@@ -2,7 +2,7 @@
   <div class="layout-container">
     <MainHeader></MainHeader>
     <div class="el-col-4 sidebar-wrap">
-      <Sidebar></Sidebar>
+      <Sidebar v-bind:data="sidebars"></Sidebar>
     </div>
     <div class="el-col-20 app-main">
       <AppMain></AppMain>
@@ -24,6 +24,26 @@ export default {
     MainHeader,
     Sidebar,
     MainFooter
+  },
+  data () {
+    return {
+      sidebars: [{
+        name: '首页',
+        route: '/index'
+      }, {
+        name: 'ToDo',
+        route: '/todo'
+      }, {
+        name: '综合',
+        child: [{
+          name: 'ToDo',
+          route: '/todo'
+        }, {
+          name: '首页',
+          route: '/index'
+        }]
+      }]
+    }
   },
   computed: {
     loading () {
