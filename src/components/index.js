@@ -1,3 +1,3 @@
-export { default as Footer } from './Footer/Footer'
+export { default as Loading } from './Loading/Loading'
 
-export { default as Sidebar } from './Sidebar/Sidebar'
+export { default as Notification } from './Notification/Notification'

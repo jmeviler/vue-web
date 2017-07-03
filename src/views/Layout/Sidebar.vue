@@ -18,7 +18,6 @@
           {{subItem.name}}
         </el-menu-item>
       </el-submenu>
-
     </el-menu>
   </el-col>
 </template>

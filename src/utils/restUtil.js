@@ -1,5 +1,4 @@
 import Config from '../../config/dev.env'
-// import { Loading } from 'element-ui';
 import axios from 'axios'
 import store from 'store'
 
@@ -16,6 +15,12 @@ axios.interceptors.response.use((response) => {
   return response.data
 }, (error) => {
   store.commit('LOADING', { loading: false, code: 500 })
+  store.commit('SHOW_ERROR', { status: true, msg: '服务器错误！' })
+
+  setTimeout(function () {
+    store.commit('SHOW_ERROR', { status: false, msg: '' })
+  }, 3000);
+
   return Promise.reject(error)
 })
 

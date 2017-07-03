@@ -5,3 +5,4 @@ export const FETCH_ALL = 'FETCH_ALL'
 
 // errors
 export const LOADING = 'LOADING'
+export const SHOW_ERROR = 'SHOW_ERROR'

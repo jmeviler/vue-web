@@ -8,14 +8,14 @@
       <AppMain></AppMain>
     </div>
     <MainFooter></MainFooter>
-    <div v-show="loading" class="loading-wrap">
-      <img src="../../assets/loading.gif">
-    </div>
+    <Loading v-bind:loading="loading" ></Loading>
+    <Notification v-bind:show="errorStatus" v-bind:msg="errorMsg"></Notification>
   </div>
 </template>
 
 <script>
 import { AppMain, MainHeader, Sidebar, MainFooter } from './index'
+import { Loading, Notification } from 'components'
 
 export default {
   name: 'Layout',
@@ -23,7 +23,9 @@ export default {
     AppMain,
     MainHeader,
     Sidebar,
-    MainFooter
+    MainFooter,
+    Loading,
+    Notification
   },
   data () {
     return {
@@ -35,6 +37,7 @@ export default {
         route: '/todo'
       }, {
         name: '综合',
+        route: '',
         child: [{
           name: 'ToDo',
           route: '/todo'
@@ -48,6 +51,12 @@ export default {
   computed: {
     loading () {
       return this.$store.state.error.loading
+    },
+    errorStatus () {
+      return this.$store.state.error.errorStatus
+    },
+    errorMsg () {
+      return this.$store.state.error.errorMsg
     }
   }
 }
